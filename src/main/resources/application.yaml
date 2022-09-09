@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/spring_batch
+    username: postgres
+    password: postgres
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      poolName: HikariCP_SpringBatch
+      autoCommit: false
+      minimumIdle: 4
+      maximumPoolSize: 50
+      maxLifeTime: 120000
+      leakDetectionThreshold: 60000
+      idleTimeout: 60000
+  batch:
+    jdbc:
+      initialize-schema: always
+
+com.example.tryspringbatch:
+  job:
+    name: domofone_to_vdome_objects_migration
+    execution:
+      at-most-once: MINUTE
