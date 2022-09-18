@@ -1,4 +1,5 @@
 spring:
+  application.name: scdf-batch-task
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/spring_batch
@@ -7,18 +8,26 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       poolName: HikariCP_SpringBatch
-      autoCommit: false
+      autoCommit: true #TODO no new row in 'TASK_TASK_BATCH' table if 'autoCommit: true'
       minimumIdle: 4
       maximumPoolSize: 50
       maxLifeTime: 120000
       leakDetectionThreshold: 60000
       idleTimeout: 60000
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   batch:
     jdbc:
       initialize-schema: always
 
 com.example.tryspringbatch:
   job:
-    name: domofone_to_vdome_objects_migration
+    name: data_migration
     execution:
-      at-most-once: MINUTE
+      at-most-once-in: MINUTE
+logging:
+  level:
+    org.springframework.cloud.task: DEBUG
+    org.springframework.jdbc: INFO

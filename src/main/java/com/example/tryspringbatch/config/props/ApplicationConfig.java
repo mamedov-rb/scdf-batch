@@ -36,6 +36,6 @@ public class ApplicationConfig {
     public static class Execution {
 
         @NotNull
-        private BoundTimeUnit atMostOnce;
+        private BoundTimeUnit atMostOnceIn;
     }
 }
